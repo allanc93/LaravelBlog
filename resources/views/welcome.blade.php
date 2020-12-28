@@ -2,12 +2,13 @@
 
 @section('content')
 <div class="jumbotron mb-0">
-    <h1>Welcome to SooperBlog</h1>
+    <h1 class="text-center">Welcome to SooperBlog</h1>
     <hr>
-    <p>Feel free to read through the blog posts, or start creating your own!</p>
-    <p>To create or edit your own blog posts, <a href="{{ route('login') }}">Login</a> or <a href="{{ route('register') }}">Register</a>.
+    <p class="text-center">Feel free to read through the blog posts, or start creating your own!</p>
+    <p class="text-center">To create or edit your own blog posts, <a href="{{ route('login') }}">Login</a> or <a href="{{ route('register') }}">Register</a>.
     </p>
 </div>
+
 <!-- <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center sm:pt-0">
     @if (Route::has('login'))
     <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">

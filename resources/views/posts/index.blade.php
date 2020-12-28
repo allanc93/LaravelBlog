@@ -1,16 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-@guest
-<div class="jumbotron mb-4">
-    <h1 class="text-center">Welcome to SooperBlog</h1>
-    <hr>
-    <p class="text-center">Feel free to read through the blog posts, or start creating your own!</p>
-    <p class="text-center">To create or edit your own blog posts, <a href="{{ route('login') }}">Login</a> or <a href="{{ route('register') }}">Register</a>.
-    </p>
-</div>
-@endguest
-
 <div class="container-fluid">
     <h1>Most Recent SooperBlog Posts</h1>
     <!-- Change to forelse for an if/else approach (eg, IF there are posts do A, if not do B) -->

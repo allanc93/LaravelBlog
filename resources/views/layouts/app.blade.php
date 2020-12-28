@@ -35,12 +35,11 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mb-lg-0 ml-auto">
-                        <!-- 
-                        <li class="nav-item">
-                            <a class="nav-link {{ Request::path() === 'posts' ? 'active' : '' }}" href="{{ route('posts.index') }}">View Posts</a>
-                        </li> -->
                         <!-- Authentication Links -->
                         @guest
+                        <li class="nav-item">
+                            <a class="nav-link {{ Request::path() === 'posts' ? 'active' : '' }}" href="{{ route('posts.index') }}">Posts</a>
+                        </li>
                         @if (Route::has('login'))
                         <li class="nav-item">
                             <a class="nav-link {{ Request::path() === 'login' ? 'active' : '' }}" href="{{ route('login') }}">{{ __('Login') }}</a>
@@ -94,6 +93,9 @@
                         </li> -->
                         <li class="nav-item">
                             <span class="nav-link text-light">Hey, {{ Auth::user()->name }}!</span>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ Request::path() === 'posts' ? 'active' : '' }}" href="{{ route('posts.index') }}">Posts</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link {{ Request::path() === 'home' ? 'active' : '' }}" href="{{ url('/home') }}">

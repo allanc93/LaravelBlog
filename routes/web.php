@@ -15,12 +15,9 @@ use App\Http\Controllers\PostController;
 |
 */
 
-// Original
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
-Route::get('/', [PostController::class, 'index'])->name('posts.index');
+Route::get('/', function () {
+    return view('welcome');
+});
 
 Auth::routes();
 
