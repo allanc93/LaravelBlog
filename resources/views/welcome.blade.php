@@ -1,11 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="jumbotron mb-0">
-    <h1 class="text-center">Welcome to SooperBlog</h1>
+<div class="jumbotron mb-0 text-center">
+    <h1>Welcome to SooperBlog</h1>
     <hr>
-    <p class="text-center">Feel free to read through the blog posts, or start creating your own!</p>
-    <p class="text-center">To create or edit your own blog posts, <a href="{{ route('login') }}">Login</a> or <a href="{{ route('register') }}">Register</a>.
+    <p>Feel free to read through the blog posts, or start creating your own!</p>
+    <a class="btn btn-dark mb-3" href="{{ route('posts.index') }}">View Blog Posts</a>
+    <p>To create or edit your own blog posts, <a href="{{ route('login') }}">Login</a> or <a href="{{ route('register') }}">Register</a>.
     </p>
 </div>
 

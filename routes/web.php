@@ -43,3 +43,6 @@ Route::get('/posts/{post}/edit', [PostController::class, 'edit'])->middleware('a
 
 // Update a post
 Route::put('/posts/{post}', [PostController::class, 'update'])->middleware('auth');
+
+// Delete a post
+Route::delete('/posts/{post}', [PostController::class, 'destroy'])->middleware('auth');

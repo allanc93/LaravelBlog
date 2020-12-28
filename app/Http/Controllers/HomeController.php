@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Post;
+use App\Models\User;
+use Illuminate\Contracts\Session\Session;
 
 class HomeController extends Controller
 {
@@ -23,6 +26,14 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        // $posts = User::find(2)->articles;
+
+        $posts = Post::select()->where('user_id', auth()->id())->get();
+        return view('home', ['posts' => $posts]);
+
+
+
+        // Default
+        // return view('home');
     }
 }

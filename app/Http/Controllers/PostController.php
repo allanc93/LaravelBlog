@@ -164,6 +164,17 @@ class PostController extends Controller
         // return redirect('/posts/' . $post->id);
     }
 
+    // Switched from using $id to Post $post
+    public function destroy(Post $post)
+    {
+        // Find post associated with id
+        // $post = Post::find($id);
+
+        $post->destroy($post->id);
+
+        return redirect('/home');
+    }
+
     // Can be used when the same validation is used more than once
     protected function validatePost()
     {

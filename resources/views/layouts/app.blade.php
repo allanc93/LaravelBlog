@@ -38,7 +38,7 @@
                         <!-- Authentication Links -->
                         @guest
                         <li class="nav-item">
-                            <a class="nav-link {{ Request::path() === 'posts' ? 'active' : '' }}" href="{{ route('posts.index') }}">Posts</a>
+                            <a class="nav-link {{ Request::path() === 'posts' ? 'active' : '' }}" href="{{ route('posts.index') }}">View Blog Posts</a>
                         </li>
                         @if (Route::has('login'))
                         <li class="nav-item">
@@ -95,7 +95,7 @@
                             <span class="nav-link text-light">Hey, {{ Auth::user()->name }}!</span>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link {{ Request::path() === 'posts' ? 'active' : '' }}" href="{{ route('posts.index') }}">Posts</a>
+                            <a class="nav-link {{ Request::path() === 'posts' ? 'active' : '' }}" href="{{ route('posts.index') }}">View Blog Posts</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link {{ Request::path() === 'home' ? 'active' : '' }}" href="{{ url('/home') }}">
