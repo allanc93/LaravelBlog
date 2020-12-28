@@ -53,15 +53,15 @@
                 </a>
                 @endforeach
             </p>
-            <a href="/posts/{{$post->id}}/edit" class="btn btn-dark">Edit</a>
-            <a href="" class="btn btn-danger">Delete</a>
+            <a href="/posts/{{$post->id}}/edit" class="btn btn-dark px-4">Edit</a>
+            <!-- <a href="" class="btn btn-danger">Delete</a> -->
 
-            <form method="POST" action="/posts/{{ $post->id }}">
+            <form method="POST" action="/posts/{{ $post->id }}" class="d-inline-block">
                 @csrf
                 @method('DELETE')
 
                 <div class="form-group">
-                    <input type="submit" class="btn btn-danger" value="Delete">
+                    <input type="submit" class="btn btn-danger px-4" value="Delete">
                 </div>
             </form>
         </div>

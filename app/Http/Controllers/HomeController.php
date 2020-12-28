@@ -28,7 +28,7 @@ class HomeController extends Controller
     {
         // $posts = User::find(2)->articles;
 
-        $posts = Post::select()->where('user_id', auth()->id())->get();
+        $posts = Post::select()->where('user_id', auth()->id())->latest()->get();
         return view('home', ['posts' => $posts]);
 
 

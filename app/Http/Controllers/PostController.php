@@ -103,7 +103,8 @@ class PostController extends Controller
         $post->tags()->attach(request('tags'));
 
         // Using a named route in the redirect
-        return redirect(route('posts.index'));
+        // return redirect(route('posts.index'));
+        return redirect(route('home'));
     }
 
     // Switched from using $id to Post $post
@@ -156,7 +157,8 @@ class PostController extends Controller
             'body' => 'required'
         ]));
 
-        return redirect('/posts/' . $post->id);
+        // return redirect('/posts/' . $post->id);
+        return redirect(route('home'));
 
         // If using the reusable validation function
         $post->update($this->validatePost());
@@ -172,7 +174,8 @@ class PostController extends Controller
 
         $post->destroy($post->id);
 
-        return redirect('/home');
+        // return redirect('/home');
+        return redirect(route('home'));
     }
 
     // Can be used when the same validation is used more than once
