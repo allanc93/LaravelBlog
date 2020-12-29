@@ -5,9 +5,11 @@
     <h1 class="card-heading">{{ $post->heading }}</h1>
     <!-- "F j, Y, g:i a" -->
     <p>Written by <em>{{ $post->author->name }}</em> on {{ $post->created_at->format('j F Y, g:ia') }}</p>
-    <p>Last edited at {{ $post->updated_at->format('j F Y, g:ia') }}</p>
-    <div class="card my-4">
+    @if ($post->created_at != $post->updated_at)
+    <p><small>Edited: {{ $post->updated_at->format('j F Y, g:ia') }}</small></p>
+    @endif
 
+    <div class="card my-4">
         <div class="card-body">
             <h2>{{ $post->subheading }}</h2>
             <img src="/images/banner.jpg" class="img-fluid" alt="{{ $post->heading }}">

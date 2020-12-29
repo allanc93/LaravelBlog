@@ -46,7 +46,9 @@
                 </a>
             </h2>
             <p>Written by <em>{{ $post->author->name }}</em> on {{ $post->created_at->format('j F Y, g:ia') }}</p>
-            <p>Last edited at {{ $post->updated_at->format('j F Y, g:ia') }}</p>
+            @if ($post->created_at != $post->updated_at)
+            <p><small>Edited: {{ $post->updated_at->format('j F Y, g:ia') }}</small></p>
+            @endif
             <p>
                 @foreach ($post->tags as $tag)
                 <a href="{{ route('posts.index', ['tag' => $tag->name]) }}" class="badge bg-dark">
