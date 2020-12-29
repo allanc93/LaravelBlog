@@ -21,14 +21,14 @@ class PostController extends Controller
         }
 
         // Return the posts>index view (blade file)
-        return view('posts.index', ['posts' => $posts]);
+        return view('posts.index', ['posts' => $posts]); // Pass posts as an argument
     }
 
     // Show a single post (based on an id)
     public function show(Post $post)
     {
         // Return the posts>show view (blade file)
-        return view('posts.show', ['post' => $post]);
+        return view('posts.show', ['post' => $post]); // Pass posts as an argument
     }
 
     // When a new post is to be created, return the create form
@@ -43,61 +43,19 @@ class PostController extends Controller
     // Validate user input from create form and persist to database
     public function store()
     {
-        // request()->validate([
-        //     'heading' => 'required',
-        //     'subheading' => 'required',
-        //     'body' => 'required'
-        // ]);
-
-        // Persist the new post
-        // Creates a new Post instance (which stores token, heading, subheading and body)
-        // $post = new Post();
-
-        // $post->heading = request('heading');
-        // $post->subheading = request('subheading');
-        // $post->body = request('body');
-
-        // $post->save();
-
-        // Create post and save as above - concise approach
-        // Post::create([
-        //     'heading' => request('heading'),
-        //     'subheading' => request('subheading'),
-        //     'body' => request('body')
-        // ]);
-
-        // Most concise approach
-        // $validatedAttributes = request()->validate([
-        //     'heading' => 'required',
-        //     'subheading' => 'required',
-        //     'body' => 'required'
-        // ]);
-
-        // Post::create($validatedAttributes);
-
-        // Most concise approach, inline version
-        // Post::create(request()->validate([
-        //     'heading' => 'required',
-        //     'subheading' => 'required',
-        //     'body' => 'required'
-        // ]));
-
-        // return redirect('/posts');
-
-        // If using the reusable validation function
-        // Post::create($this->validatePost());
-
-        // return redirect('/posts');
-
-        // If using the reusable validation function and passing a user_id FK
+        // Validate the input using the reusable validation function
         $this->validatePost();
 
-        // validation no longer maps to table exactly, so take specfic values
+        // Create a new post instance
         $post = new Post(request(['heading', 'subheading', 'body']));
 
+        // Set the user_id FK as the logged in user's id
         $post->user_id = Auth::id();
+
+        // Save the post to the database
         $post->save();
 
+        // Attach any tags in the request to the post
         $post->tags()->attach(request('tags'));
 
         // Return a redirect to the home view (blade file) - uses a named route 'home'
@@ -107,7 +65,11 @@ class PostController extends Controller
     // When a post is to be edited, return the edit form
     public function edit(Post $post)
     {
-        return view('posts.edit',  ['post' => $post]);
+        // Return the posts>edit view (blade file)
+        return view('posts.edit', [
+            'post' => $post, // Pass posts an argument
+            'tags' => Tag::all() // Pass tags as an argument
+        ]);
     }
 
     // Validate user input from update form and persist to database
@@ -145,19 +107,31 @@ class PostController extends Controller
 
 
         // More concise approach, inline version
-        $post->update(request()->validate([
-            'heading' => 'required',
-            'subheading' => 'required',
-            'body' => 'required'
-        ]));
+        // $post->update(request()->validate([
+        //     'heading' => 'required',
+        //     'subheading' => 'required',
+        //     'body' => 'required'
+        // ]));
 
         // return redirect('/posts/' . $post->id);
-        return redirect(route('home'));
+        // return redirect(route('home'));
 
-        // If using the reusable validation function
+        // Update the post, checking it is valid using the reusable validation function
         $post->update($this->validatePost());
 
-        // return redirect('/posts/' . $post->id);
+        if (request('tags')) {
+            // Detach any existing tags
+            $post->tags()->detach();
+            // Attach any tags in the request to the post
+            $post->tags()->attach(request('tags'));
+        }
+        // // Detach any existing tags
+        // $post->tags()->detach();
+        // // Attach any tags in the request to the post
+        // $post->tags()->attach(request('tags'));
+
+        // Return a redirect to the home view (blade file) - uses a named route 'home'
+        return redirect(route('home'));
     }
 
     // Deletes a specific post based on an id

@@ -3,9 +3,9 @@
 @section('content')
 <div id="wrapper">
     <div id="page" class="container">
-        <h1 class="heading has-text-weight-bold is-size-4">Update Post</h1>
+        <h1 class="heading has-text-weight-bold is-size-4">Update Post: {{ $post->heading }}</h1>
 
-        <!-- Amend to send a PUT request using @method('PUT') -->
+        <!-- Send a PUT request using @method('PUT') -->
         <form method="POST" action="/posts/{{ $post->id }}">
             @csrf
             @method('PUT')
@@ -38,6 +38,28 @@
                 </textarea>
 
                 @error('body')
+                <p class="text-danger">{{ $message }}</p>
+                @enderror
+            </div>
+
+            <div class="mb-3">
+                <label for="tags" class="form-label">Tags</label>
+                <select class="form-select {{ $errors->has('tags') ? 'border-danger' : '' }}" name="tags[]" id="tags" multiple>
+                    @foreach ($tags as $tag)
+                    <option value="{{ $tag->id }}">{{ $tag->name }}</option>
+                    @endforeach
+                </select>
+                <p class="form-text">(Hold ctrl/cmd to select multiple)</p>
+                <p class="form-text">To keep the existing tags, ignore this section</p>
+                <p class="my-2">
+                    Existing tags:
+                    @foreach ($post->tags as $tag)
+                    <span class="badge bg-dark">{{ $tag->name }}</span>
+                    @endforeach
+                </p>
+
+
+                @error('tags')
                 <p class="text-danger">{{ $message }}</p>
                 @enderror
             </div>

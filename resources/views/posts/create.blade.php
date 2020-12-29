@@ -46,7 +46,7 @@
                     <option value="{{ $tag->id }}">{{ $tag->name }}</option>
                     @endforeach
                 </select>
-                <div class="form-text">(Hold ctrl/cmd to select multiple tags)</div>
+                <p class="form-text">(Hold ctrl/cmd to select multiple)</p>
 
                 @error('tags')
                 <p class="text-danger">{{ $message }}</p>

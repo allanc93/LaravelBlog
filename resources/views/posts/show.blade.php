@@ -5,6 +5,7 @@
     <h1 class="card-heading">{{ $post->heading }}</h1>
     <!-- "F j, Y, g:i a" -->
     <p>Written by <em>{{ $post->author->name }}</em> on {{ $post->created_at->format('j F Y, g:ia') }}</p>
+    <p>Last edited at {{ $post->updated_at->format('j F Y, g:ia') }}</p>
     <div class="card my-4">
 
         <div class="card-body">
