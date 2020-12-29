@@ -9,40 +9,38 @@ use App\Models\Tag;
 
 class PostController extends Controller
 {
+    // Show all posts
     public function index()
     {
-        // Check if a certain tag is being requested
+        // Check if a tag is within the request
         if (request('tag')) {
             $posts = Tag::where('name', request('tag'))->firstOrFail()->posts;
         } else {
-            // Can use take(x)->get(); or paginate(x);
+            // Could use take(x)->get(); or paginate(x);
             $posts = Post::latest()->get();
         }
 
+        // Return the posts>index view (blade file)
         return view('posts.index', ['posts' => $posts]);
     }
 
-    // public function show($id)
-    // {
-    //     $post = Post::findOrFail($id);
-
-    //     return view('posts.show', ['post' => $post]);
-    // }
-
-    // Alternate approach to above
+    // Show a single post (based on an id)
     public function show(Post $post)
     {
+        // Return the posts>show view (blade file)
         return view('posts.show', ['post' => $post]);
     }
 
+    // When a new post is to be created, return the create form
     public function create()
     {
-        // Pass tags as an argument
+        // Return the posts>create view (blade file)
         return view('posts.create', [
-            'tags' => Tag::all()
+            'tags' => Tag::all() // Pass tags as an argument
         ]);
     }
 
+    // Validate user input from create form and persist to database
     public function store()
     {
         // request()->validate([
@@ -102,21 +100,17 @@ class PostController extends Controller
 
         $post->tags()->attach(request('tags'));
 
-        // Using a named route in the redirect
-        // return redirect(route('posts.index'));
+        // Return a redirect to the home view (blade file) - uses a named route 'home'
         return redirect(route('home'));
     }
 
-    // Switched from using $id to Post $post
+    // When a post is to be edited, return the edit form
     public function edit(Post $post)
     {
-        // Find post associated with id
-        // $post = Post::find($id);
-
         return view('posts.edit',  ['post' => $post]);
     }
 
-    // Switched from using $id to Post $post
+    // Validate user input from update form and persist to database
     public function update(Post $post)
     {
         // request()->validate([
@@ -166,26 +160,25 @@ class PostController extends Controller
         // return redirect('/posts/' . $post->id);
     }
 
-    // Switched from using $id to Post $post
+    // Deletes a specific post based on an id
     public function destroy(Post $post)
     {
-        // Find post associated with id
-        // $post = Post::find($id);
-
+        // Removes specified post
         $post->destroy($post->id);
 
-        // return redirect('/home');
+        // Return a redirect to the home view (blade file) - uses a named route 'home'
         return redirect(route('home'));
     }
 
-    // Can be used when the same validation is used more than once
+    // Validates user input from the creating or updating of posts
     protected function validatePost()
     {
+        // Returns a validated request
         return request()->validate([
-            'heading' => 'required',
-            'subheading' => 'required',
-            'body' => 'required',
-            'tags' => 'exists:tags,id'
+            'heading' => 'required', // Field is required
+            'subheading' => 'required', // Field is required
+            'body' => 'required', // Field is required
+            'tags' => 'exists:tags,id' // Only tags with an existing id can be used
         ]);
     }
 }
