@@ -6,7 +6,7 @@
         <h1 class="heading has-text-weight-bold is-size-4">Update Post: {{ $post->heading }}</h1>
 
         <!-- Send a PUT request using @method('PUT') -->
-        <form method="POST" action="/posts/{{ $post->id }}">
+        <form method="POST" action="/posts/{{ $post->id }}" enctype="multipart/form-data" autocomplete="off">
             @csrf
             @method('PUT')
 
@@ -22,9 +22,7 @@
             <div class="mb-3">
                 <label for="subheading" class="form-label">Subheading</label>
 
-                <textarea class="form-control {{ $errors->has('subheading') ? 'border-danger' : '' }}" name="subheading" id="subheading" rows="3">
-                {{ $post->subheading }}
-                </textarea>
+                <textarea class="form-control {{ $errors->has('subheading') ? 'border-danger' : '' }}" name="subheading" id="subheading" rows="3">{{ $post->subheading }}</textarea>
 
                 @error('subheading')
                 <p class="text-danger">{{ $message }}</p>
@@ -33,11 +31,28 @@
 
             <div class="mb-3">
                 <label for="body" class="form-label">Body</label>
-                <textarea class="form-control {{ $errors->has('body') ? 'border-danger' : '' }}" name="body" id="body" rows="5">
-                {{ $post->body }}
-                </textarea>
+                <textarea class="form-control {{ $errors->has('body') ? 'border-danger' : '' }}" name="body" id="body" rows="5">{{ $post->body }}</textarea>
 
                 @error('body')
+                <p class="text-danger">{{ $message }}</p>
+                @enderror
+            </div>
+
+            <p class="mb-3">
+                Current Image:
+                <br>
+                @if (file_exists('storage/img/posts/post_img_' . $post->id . '.jpg'))
+                <img src="/storage/img/posts/post_img_{{ $post->id }}.jpg" style="width:auto;max-height:40vh;object-fit:cover;" alt="{{ $post->heading }}">
+                @else
+                No image.
+                @endif
+            </p>
+
+            <div class="mb-3">
+                <label for="image" class="form-label">Choose New Image</label>
+                <input type="file" class="form-control {{ $errors->has('image') ? 'border-danger' : '' }}" id="image" name="image" value="">
+
+                @error('image')
                 <p class="text-danger">{{ $message }}</p>
                 @enderror
             </div>
@@ -57,7 +72,6 @@
                     <span class="badge bg-dark">{{ $tag->name }}</span>
                     @endforeach
                 </p>
-
 
                 @error('tags')
                 <p class="text-danger">{{ $message }}</p>

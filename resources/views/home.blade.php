@@ -2,21 +2,17 @@
 
 @section('content')
 <div class="container">
-    <div class="row justify-content-center mb-4">
+    <h1>{{ Auth::user()->name }}'s Dashboard</h1>
+    <div class="row justify-content-center my-4">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
-
+                <div class="card-header">You are logged in {{ Auth::user()->name }}!</div>
                 <div class="card-body">
                     @if (session('status'))
                     <div class="alert alert-success" role="alert">
                         {{ session('status') }}
                     </div>
                     @endif
-
-                    You are logged in {{ Auth::user()->name }}!
-                    <br>
-                    <!-- <a href="#my-posts" class="btn btn-dark d-block my-3">My Posts</a> -->
 
                     <a href="{{ url('/posts/create') }}" class="btn btn-dark d-block my-3">Create Post</a>
 
@@ -32,23 +28,23 @@
         </div>
     </div>
 
-
-
-    <h1 id="my-posts">My Posts</h1>
+    <h2 id="my-posts">My Posts</h2>
     @forelse ($posts as $post)
     <div class="card my-4">
-        <img src="/images/banner.jpg" class="card-img-top" alt="{{ $post->heading }}">
+        @if (file_exists('storage/img/posts/post_img_' . $post->id . '.jpg'))
+        <img src="/storage/img/posts/post_img_{{ $post->id }}.jpg" class="card-img-top" alt="{{ $post->heading }}">
+        @endif
 
         <div class="card-body">
-            <h2 class="card-title">
-                <a href="/posts/{{ $post->id }}" class="text-dark">
-                    {{ $post->heading }}
-                </a>
-            </h2>
-            <p>Written by <em>{{ $post->author->name }}</em> on {{ $post->created_at->format('j F Y, g:ia') }}</p>
-            @if ($post->created_at != $post->updated_at)
-            <p><small>Edited: {{ $post->updated_at->format('j F Y, g:ia') }}</small></p>
-            @endif
+            <h2 class="card-title">{{ $post->heading }}</h2>
+            <!-- "F j, Y, g:i a" -->
+            <p>Written by <em>{{ $post->author->name }}</em> on {{ $post->created_at->format('j F Y, g:ia') }}
+                @if ($post->created_at != $post->updated_at)
+                <br><small>Edited: {{ $post->updated_at->format('j F Y, g:ia') }}</small>
+                @endif
+            </p>
+            <h3>{{ $post->subheading }}</h3>
+            <p class="my-4">{{ $post->body }}</p>
             <p>
                 @foreach ($post->tags as $tag)
                 <a href="{{ route('posts.index', ['tag' => $tag->name]) }}" class="badge bg-dark">

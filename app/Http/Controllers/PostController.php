@@ -55,6 +55,17 @@ class PostController extends Controller
         // Save the post to the database
         $post->save();
 
+        // Check if an image is included in the request
+        if (request('image')) {
+            $path = request('image');
+
+            $path->storeAs(
+                '/img/posts',
+                'post_img_' . $post->id . '.jpg',
+                'public'
+            );
+        }
+
         // Attach any tags in the request to the post
         $post->tags()->attach(request('tags'));
 
@@ -119,6 +130,17 @@ class PostController extends Controller
         // Update the post, checking it is valid using the reusable validation function
         $post->update($this->validatePost());
 
+        // Check if an image is included in the request
+        if (request('image')) {
+            $path = request('image');
+
+            $path->storeAs(
+                '/img/posts',
+                'post_img_' . $post->id . '.jpg',
+                'public'
+            );
+        }
+
         if (request('tags')) {
             // Detach any existing tags
             $post->tags()->detach();
@@ -152,6 +174,7 @@ class PostController extends Controller
             'heading' => 'required', // Field is required
             'subheading' => 'required', // Field is required
             'body' => 'required', // Field is required
+            'image' => 'mimes:jpg,jpeg,png,gif,bmp|max:2048', // Image validation
             'tags' => 'exists:tags,id' // Only tags with an existing id can be used
         ]);
     }
