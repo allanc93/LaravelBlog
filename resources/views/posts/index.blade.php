@@ -36,5 +36,9 @@
     @empty
     <p>No relevant articles yet!</p>
     @endforelse
+
+    <div>
+        {{ $posts->links('pagination::bootstrap-4') }}
+    </div>
 </div>
 @endsection

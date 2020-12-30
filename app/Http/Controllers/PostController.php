@@ -16,8 +16,8 @@ class PostController extends Controller
         if (request('tag')) {
             $posts = Tag::where('name', request('tag'))->firstOrFail()->posts;
         } else {
-            // Could use take(x)->get(); or paginate(x);
-            $posts = Post::latest()->get();
+            // Could use latest()->get();...latest()->take(x);...latest()->paginate(x);
+            $posts = Post::latest()->paginate(5);
         }
 
         // Return the posts>index view (blade file)
