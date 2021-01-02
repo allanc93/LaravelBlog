@@ -14,6 +14,7 @@ class TagSeeder extends Seeder
      */
     public function run()
     {
+        // Create an array of tags
         $tags = [
             'Sports',
             'Outdoor',
@@ -27,12 +28,13 @@ class TagSeeder extends Seeder
             'Politics'
         ];
 
+        // Loop through each tag assigning the name
         foreach ($tags as $name) {
             $tag = new Tag([
                 'name' => $name
             ]);
 
-            $tag->save();
+            $tag->save(); // Save the tags
         }
     }
 }

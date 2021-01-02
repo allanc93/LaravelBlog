@@ -5,13 +5,16 @@
     <div id="page" class="container">
         <h1 class="heading has-text-weight-bold is-size-4">Update Post: {{ $post->heading }}</h1>
 
-        <!-- Send a PUT request using @method('PUT') -->
+        <!-- Form uses csrf tag to prevent CSRF attacks -->
+        <!-- Send a spoofed PUT request using method('PUT') -->
         <form method="POST" action="/posts/{{ $post->id }}" enctype="multipart/form-data" autocomplete="off">
             @csrf
             @method('PUT')
 
             <div class="mb-3">
                 <label for="heading" class="form-label">Heading</label>
+                <!-- If there is an error, add a class -->
+                <!-- Default value comes from existing post -->
                 <input type="text" class="form-control {{ $errors->has('heading') ? 'border-danger' : '' }}" id="heading" name="heading" value="{{ $post->heading }}">
 
                 @error('heading')
@@ -21,7 +24,8 @@
 
             <div class="mb-3">
                 <label for="subheading" class="form-label">Subheading</label>
-
+                <!-- If there is an error, add a class -->
+                <!-- Default value comes from existing post -->
                 <textarea class="form-control {{ $errors->has('subheading') ? 'border-danger' : '' }}" name="subheading" id="subheading" rows="3">{{ $post->subheading }}</textarea>
 
                 @error('subheading')
@@ -31,6 +35,8 @@
 
             <div class="mb-3">
                 <label for="body" class="form-label">Body</label>
+                <!-- If there is an error, add a class -->
+                <!-- Default value comes from existing post -->
                 <textarea class="form-control {{ $errors->has('body') ? 'border-danger' : '' }}" name="body" id="body" rows="5">{{ $post->body }}</textarea>
 
                 @error('body')
@@ -50,6 +56,8 @@
 
             <div class="mb-3">
                 <label for="image" class="form-label">Choose New Image</label>
+                <!-- If there is an error, add a class -->
+                <!-- Default value comes from existing post -->
                 <input type="file" class="form-control {{ $errors->has('image') ? 'border-danger' : '' }}" id="image" name="image" value="">
 
                 @error('image')
@@ -59,6 +67,8 @@
 
             <div class="mb-3">
                 <label for="tags" class="form-label">Tags</label>
+                <!-- If there is an error, add a class -->
+                <!-- Default value comes from existing post -->
                 <select class="form-select {{ $errors->has('tags') ? 'border-danger' : '' }}" name="tags[]" id="tags" multiple>
                     @foreach ($tags as $tag)
                     <option value="{{ $tag->id }}">{{ $tag->name }}</option>

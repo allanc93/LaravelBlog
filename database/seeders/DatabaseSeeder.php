@@ -13,9 +13,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
-        $this->call(AdminSeeder::class);
-        $this->call(TagSeeder::class);
-        $this->call(UserSeeder::class);
+        // Runs Tag, Admin then User Seeders
+        $this->call(TagSeeder::class); // Creates 10 tags in the tags table
+        $this->call(AdminSeeder::class); // Creates 1 admin user
+        $this->call(UserSeeder::class); // Creates 20 users, each with 3 posts - each post having between 1-6 tags
     }
 }
