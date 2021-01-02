@@ -32,10 +32,11 @@ class UserFactory extends Factory
         ];
     }
 
-    public function configure()
-    {
-        return $this->afterCreating(function (User $user) {
-            \App\Models\Post::factory()->count(3)->create(['user_id' => $user->id]);
-        });
-    }
+    // This function creates 
+    // public function configure()
+    // {
+    //     return $this->afterCreating(function (User $user) {
+    //         \App\Models\Post::factory()->create(['user_id' => $user->id]);
+    //     });
+    // }
 }

@@ -29,6 +29,7 @@
     </div>
 
     <h2 id="my-posts">My Posts</h2>
+    <p>You've written {{ Auth::user()->posts->count() }} blog posts.</p>
     @forelse ($posts as $post)
     <div class="card my-4">
         @if (file_exists('storage/img/posts/post_img_' . $post->id . '.jpg'))
@@ -38,7 +39,7 @@
         <div class="card-body">
             <h2 class="card-title">{{ $post->heading }}</h2>
             <!-- "F j, Y, g:i a" -->
-            <p>Written by <em>{{ $post->author->name }}</em> on {{ $post->created_at->format('j F Y, g:ia') }}
+            <p>Written by <em>{{ $post->author->name }}</em> on {{ $post->created_at->format('j F Y, g:ia') }} ({{$post->created_at->diffForHumans()}})
                 @if ($post->created_at != $post->updated_at)
                 <br><small>Edited: {{ $post->updated_at->format('j F Y, g:ia') }}</small>
                 @endif
@@ -67,7 +68,8 @@
     </div>
 
     @empty
-    <p>You haven't written any posts yet {{ Auth::user()->name }}!</p>
+    <p>Time to get writing {{ Auth::user()->name }}!</p>
+
     @endforelse
 </div>
 @endsection

@@ -18,7 +18,7 @@
                     {{ $post->heading }}
                 </a>
             </h2>
-            <p>Written by <em>{{ $post->author->name }}</em> on {{ $post->created_at->format('j F Y, g:ia') }}
+            <p>Written by <em>{{ $post->author->name }}</em> on {{ $post->created_at->format('j F Y, g:ia') }} ({{$post->created_at->diffForHumans()}})
                 @if ($post->created_at != $post->updated_at)
                 <br><small>Edited: {{ $post->updated_at->format('j F Y, g:ia') }}</small>
                 @endif

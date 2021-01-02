@@ -15,24 +15,24 @@ use App\Http\Controllers\PostController;
 |
 */
 
+// Welcome page
 Route::get('/', function () {
     return view('welcome');
 });
 
+//Routes added by auth
 Auth::routes();
 
+// Home page for logged in users
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-// All posts on one page
-// Route::get('/posts', [PostController::class, 'index']);
-// As above, but using a named route
+// All posts on one page using a named route
 Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
 
 // Storing a new post
 Route::post('/posts', [PostController::class, 'store'])->middleware('auth');
 
-// Create post
-// PRECEDENCE MATTERS! Use create before the wildcard
+// Create post - precedence matters, need to use create before the wildcard route below
 Route::get('/posts/create', [PostController::class, 'create'])->middleware('auth');
 
 // Show an individual post

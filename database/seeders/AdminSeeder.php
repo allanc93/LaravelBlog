@@ -18,7 +18,7 @@ class AdminSeeder extends Seeder
     {
         $admin = new User([
             'name' => 'Admin',
-            'email' => 'admin@admin.com',
+            'email' => 'admin@123.com',
             'email_verified_at' => now(),
             'password' => Hash::make('admin123'),
             'remember_token' => Str::random(10),
