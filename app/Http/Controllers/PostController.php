@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use App\Models\Post;
 use App\Models\Tag;
 
@@ -76,6 +77,9 @@ class PostController extends Controller
     // When a post is to be edited, return the edit form
     public function edit(Post $post)
     {
+        abort_unless(Gate::allows('update', $post), 403);
+
+
         // Return the posts>edit view (blade file)
         return view('posts.edit', [
             'post' => $post, // Pass posts an argument
@@ -86,6 +90,8 @@ class PostController extends Controller
     // Validate user input from update form and persist to database
     public function update(Post $post)
     {
+        abort_unless(Gate::allows('update', $post), 403);
+
         // request()->validate([
         //     'heading' => 'required',
         //     'subheading' => 'required',
@@ -159,6 +165,8 @@ class PostController extends Controller
     // Deletes a specific post based on an id
     public function destroy(Post $post)
     {
+        abort_unless(Gate::allows('delete', $post), 403);
+
         // Removes specified post
         $post->destroy($post->id);
 

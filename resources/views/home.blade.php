@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <h1>{{ Auth::user()->name }}'s Dashboard</h1>
+    <h1>Home</h1>
     <div class="row justify-content-center my-4">
         <div class="col-md-8">
             <div class="card">

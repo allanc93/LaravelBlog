@@ -30,6 +30,17 @@
                 </a>
                 @endforeach
             </p>
+
+            @if (Auth::user() && Auth::user()->role === 'admin')
+            <form method="POST" action="/posts/{{ $post->id }}" class="d-inline-block">
+                @csrf
+                @method('DELETE')
+
+                <div class="form-group">
+                    <input type="submit" class="btn btn-danger px-4" value="Delete">
+                </div>
+            </form>
+            @endif
         </div>
     </div>
 

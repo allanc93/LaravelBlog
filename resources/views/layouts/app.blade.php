@@ -95,12 +95,12 @@
                             <span class="nav-link text-success">Hey, {{ Auth::user()->name }}!</span>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link {{ Request::path() === 'posts' ? 'active' : '' }}" href="{{ route('posts.index') }}">Recent Posts</a>
+                            <a class="nav-link {{ Request::path() === 'home' ? 'active' : '' }}" href="{{ url('/home') }}">
+                                Home
+                            </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link {{ Request::path() === 'home' ? 'active' : '' }}" href="{{ url('/home') }}">
-                                Dashboard
-                            </a>
+                            <a class="nav-link {{ Request::path() === 'posts' ? 'active' : '' }}" href="{{ route('posts.index') }}">Recent Posts</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
