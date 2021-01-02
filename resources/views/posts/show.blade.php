@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <h1>Viewing {{ $post->heading }}</h1>
+    <h1>Viewing: {{ $post->heading }}</h1>
     <div class="card my-4">
         <!-- Check if the current post has an associated image -->
         @if (file_exists('storage/img/posts/post_img_' . $post->id . '.jpg'))
