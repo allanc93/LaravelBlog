@@ -23,11 +23,14 @@ class PostFactory extends Factory
      */
     public function definition()
     {
+        // 
         return [
-            'user_id' => \App\Models\User::factory(),
-            'heading' => $this->faker->sentence,
-            'subheading' => $this->faker->sentence,
-            'body' => $this->faker->paragraph
+            //Generates faker data for columns in post table
+            // user_id FK is now defined in the UserSeeder  - kept for reference
+            // 'user_id' => \App\Models\User::factory(), // Use the id from the current user instance
+            'heading' => $this->faker->sentence, // Post heading
+            'subheading' => $this->faker->sentence, // Post subheading
+            'body' => $this->faker->paragraph // Post body text
         ];
     }
 }

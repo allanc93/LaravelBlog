@@ -10,10 +10,12 @@ class PostPolicy
 {
     use HandlesAuthorization;
 
+    // Function to check user's role - runs before subsequent functions
     public function before($user, $ability)
     {
+        // Check if the current user has an admin role
         if ($user->role === 'admin') {
-            return true;
+            return true; // If user is an admin, returns true
         }
     }
 
@@ -25,7 +27,7 @@ class PostPolicy
      */
     public function viewAny(User $user)
     {
-        //
+        // All users are able to view all posts, authorisation not necessary
     }
 
     /**
@@ -37,7 +39,7 @@ class PostPolicy
      */
     public function view(User $user, Post $post)
     {
-        //
+        // All users are able to view single posts, authorisation not necessary
     }
 
     /**
@@ -48,7 +50,7 @@ class PostPolicy
      */
     public function create(User $user)
     {
-        //
+        // All authenticated users are able to create posts, authorisation not necessary
     }
 
     /**
@@ -60,7 +62,8 @@ class PostPolicy
      */
     public function update(User $user, Post $post)
     {
-        return $user->id === $post->user_id;
+        // Authorisation is required to update posts
+        return $user->id === $post->user_id; // Users are only able to update their own posts
     }
 
     /**
@@ -72,7 +75,8 @@ class PostPolicy
      */
     public function delete(User $user, Post $post)
     {
-        return $user->id === $post->user_id;
+        // Authorisation is required to delete posts
+        return $user->id === $post->user_id; // Users are only able to delete their own posts
     }
 
     /**

@@ -32,9 +32,11 @@ class UserFactory extends Factory
         ];
     }
 
-    // This function creates 
+    // This function creates a user_id FK for a post, based on the current user's id
+    // This is now taken care of by the UserSeeder - kept for reference
     // public function configure()
     // {
+    //     // Function occurs after the post is created
     //     return $this->afterCreating(function (User $user) {
     //         \App\Models\Post::factory()->create(['user_id' => $user->id]);
     //     });

@@ -9,9 +9,10 @@ class Tag extends Model
 {
     use HasFactory;
 
-    // Find articles corresponding to a tag - many-to-many
+    // Find posts corresponding to a tag - many-to-many
     public function posts()
     {
+        // Many tags can belong to many posts
         return $this->belongsToMany(Post::class);
     }
 }

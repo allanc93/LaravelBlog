@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Contracts\Session\Session;
+
 use App\Models\Post;
 use App\Models\User;
-use Illuminate\Contracts\Session\Session;
 
 class HomeController extends Controller
 {

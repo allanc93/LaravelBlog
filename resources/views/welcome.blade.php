@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+<!-- Jumbotron shows some basic nformation and links to login/register -->
 <div class="jumbotron mb-0 text-center">
     <h1>Welcome to SooperBlog</h1>
     <hr>

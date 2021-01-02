@@ -41,8 +41,10 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    // Find posts corresponding to a user
     public function posts()
     {
-        return $this->hasMany(Post::class); // select * from posts where user_id = %;
+        // A user can have many posts
+        return $this->hasMany(Post::class);
     }
 }
