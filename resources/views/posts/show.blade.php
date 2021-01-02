@@ -7,6 +7,13 @@
         <!-- Check if the current post has an associated image -->
         @if (file_exists('storage/img/posts/post_img_' . $post->id . '.jpg'))
         <img src="/storage/img/posts/post_img_{{ $post->id }}.jpg" class="card-img-top" alt="{{ $post->heading }}">
+        <!-- If a photo doesn't exist, use a placeholder image (different for odd and even ids) -->
+        <!-- Posts with an odd id (checks the id with bitchecking) -->
+        @elseif ($post->id & 1)
+        <img src="/storage/placeholder-sea.jpg" class="card-img-top" alt="Placeholder image">
+        <!-- Posts with an even id -->
+        @else
+        <img src="/storage/placeholder-trees.jpg" class="card-img-top" alt="Placeholder image">
         @endif
 
         <div class="card-body">
