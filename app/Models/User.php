@@ -41,7 +41,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    // Find posts corresponding to a user
+    // Define the relationship between a user and posts
     public function posts()
     {
         // A user can have many posts

@@ -21,8 +21,8 @@ class CreatePostsTable extends Migration
             $table->text('body');
             $table->timestamps();
 
-            // Add FK relationship from user_id in articles to id in users
-            // This deletes associated articles
+            // Add FK relationship from user_id in posts to id in users
+            // This deletes associated posts
             $table->foreign('user_id')
                 ->references('id')
                 ->on('users')

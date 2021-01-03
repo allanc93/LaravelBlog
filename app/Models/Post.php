@@ -12,11 +12,14 @@ class Post extends Model
     // Assign properties that can be mass assigned
     protected $fillable = ['heading', 'subheading', 'body'];
 
-    // Find a post belonging to an author (user)
+
+    // Define the relationship between posts and users
     public function author()
     {
         // A post belongs to a user
-        return $this->belongsTo(User::class, 'user_id'); // Override the FK - would expect author_id, but in this case user_id is used
+        // Because author() is used instead of user(), it is necessary to override the FK
+        // Laravel would assume author_id to be the FK, but in this case the FK is user_id
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     // Find tags corresponding to a post - many-to-many

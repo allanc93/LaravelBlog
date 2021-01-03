@@ -15,12 +15,12 @@ class CreateTagsTable extends Migration
     {
         Schema::create('tags', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique();
+            $table->string('name')->unique(); // Name of tag, eg Football, Fishing, Computing
             $table->timestamps();
         });
 
-        // Creating a pivot table between Articles and Tags
-        // Naming convention: singular words, alphabetical, separated by underscore
+        // Creating a pivot table between Posts and Tags
+        // Naming convention = singular words, alphabetical, separated by underscore
         Schema::create('post_tag', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('post_id');
@@ -29,8 +29,19 @@ class CreateTagsTable extends Migration
 
             $table->unique(['post_id', 'tag_id']);
 
-            $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');
-            $table->foreign('tag_id')->references('id')->on('tags')->onDelete('cascade');
+            // Add FK relationships from post_id in post_tag to id in posts
+            // When a post is deleted, so too are its related tags in the post_tag pivot table
+            $table->foreign('post_id')
+                ->references('id')
+                ->on('posts')
+                ->onDelete('cascade');
+
+            // Add FK relationships from tag_id in post_tag to id in tags
+            // When a post is deleted, so too are its related tags in the post_tag pivot table
+            $table->foreign('tag_id')
+                ->references('id')
+                ->on('tags')
+                ->onDelete('cascade');
         });
     }
 
@@ -41,6 +52,6 @@ class CreateTagsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tags');
+        Schema::dropIfExists(['tags', 'post_tag']);
     }
 }
