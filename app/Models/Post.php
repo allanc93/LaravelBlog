@@ -22,7 +22,7 @@ class Post extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    // Find tags corresponding to a post - many-to-many
+    // Define the relationship between posts and tags
     public function tags()
     {
         // Many posts can belong to many tags

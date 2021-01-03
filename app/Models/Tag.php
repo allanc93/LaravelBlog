@@ -9,7 +9,7 @@ class Tag extends Model
 {
     use HasFactory;
 
-    // Find posts corresponding to a tag - many-to-many
+    // Define the relationship between tags and posts
     public function posts()
     {
         // Many tags can belong to many posts

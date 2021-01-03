@@ -85,7 +85,6 @@ class PostController extends Controller
         // Check if PostPolicy allows current user to edit this post
         abort_unless(Gate::allows('update', $post), 403);
 
-
         // Return the posts>edit view (blade file)
         return view('posts.edit', [
             'post' => $post, // Pass posts an argument
