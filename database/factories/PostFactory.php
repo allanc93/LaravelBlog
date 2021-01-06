@@ -25,7 +25,7 @@ class PostFactory extends Factory
     {
         // 
         return [
-            //Generates faker data for columns in post table
+            // Generates faker data for columns in post table
             // user_id FK is now defined in the UserSeeder  - kept for reference
             // 'user_id' => \App\Models\User::factory(), // Use the id from the current user instance
             'heading' => $this->faker->sentence, // Post heading

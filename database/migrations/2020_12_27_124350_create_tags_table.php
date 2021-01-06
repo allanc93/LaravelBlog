@@ -37,7 +37,7 @@ class CreateTagsTable extends Migration
                 ->onDelete('cascade');
 
             // Add FK relationships from tag_id in post_tag to id in tags
-            // When a post is deleted, so too are its related tags in the post_tag pivot table
+            // When a tag is deleted, so too are its related tags in the post_tag pivot table
             $table->foreign('tag_id')
                 ->references('id')
                 ->on('tags')
