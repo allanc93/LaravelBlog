@@ -48,7 +48,7 @@
                 Current Image:
                 <br>
                 @if (file_exists('storage/img/posts/post_img_' . $post->id . '.jpg'))
-                <img src="/storage/img/posts/post_img_{{ $post->id }}.jpg" style="width:auto;max-height:40vh;object-fit:cover;" alt="{{ $post->heading }}">
+                <img src="/storage/img/posts/post_img_{{ $post->id }}.jpg?v={{ Date("Y.m.d.G.i.s") }}" style="width:auto;max-height:40vh;object-fit:cover;" alt="{{ $post->heading }}">
                 @else
                 No image.
                 @endif

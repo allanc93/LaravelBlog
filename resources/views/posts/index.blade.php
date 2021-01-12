@@ -18,7 +18,7 @@
         <!-- Check if the current post has an associated image -->
         @if (file_exists('storage/img/posts/post_img_' . $post->id . '.jpg'))
         <a href="/posts/{{ $post->id }}">
-            <img src="/storage/img/posts/post_img_{{ $post->id }}.jpg" class="card-img-top" alt="{{ $post->heading }}">
+            <img src="/storage/img/posts/post_img_{{ $post->id }}.jpg?v={{ Date("Y.m.d.G.i.s") }}" class="card-img-top" alt="{{ $post->heading }}">
         </a>
         <!-- If a photo doesn't exist, use a placeholder image (different for odd and even ids) -->
         <!-- Posts with an odd id (checks the id with bitchecking) -->
