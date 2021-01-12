@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Gate;
 use App\Models\Post;
 use App\Models\Tag;
 
+use function PHPUnit\Framework\fileExists;
+
 class PostController extends Controller
 {
     // Show all posts
@@ -132,7 +134,12 @@ class PostController extends Controller
         // Check if PostPolicy allows current user to delete this post
         abort_unless(Gate::allows('delete', $post), 403);
 
-        // Removes specified post
+        // Find associated image (if any) and delete from storage directory
+        if (file_exists('storage/img/posts/post_img_' . $post->id . '.jpg')) {
+            unlink('storage/img/posts/post_img_' . $post->id . '.jpg');
+        }
+
+        // Removes specified post from database
         $post->destroy($post->id);
 
         // Return a redirect to the home view (blade file) - uses a named route 'home'
